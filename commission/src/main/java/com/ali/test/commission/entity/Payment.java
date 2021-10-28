@@ -2,6 +2,7 @@ package com.ali.test.commission.entity;
 
 import java.time.LocalDateTime;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -16,6 +17,7 @@ public class Payment {
 	private String id;
 	
 	@Min(value=0)
+	@Max(value=1000000)
 	private double amount;
 	
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")

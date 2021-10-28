@@ -1,30 +1,22 @@
 package com.ali.test.commission.ops;
 
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.time.LocalDateTime;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import com.ali.test.commission.entity.Payment;
-
 class PaymentOperationsTest {
-
 	@Test
 	void testLessThan10000() {
-		Payment payment=new Payment("+78997776666",5000.0,LocalDateTime.now(),"Spending money is good");
-		assertEquals(50, PaymentOperations.getCommission(payment).getCommission(), "Error in commission calculations for a amount less than 5000");
+		assertEquals("Error in commission calculations for a amount less than 10000",50.0, PaymentOperations.calculateCommission(5000.0),1e-10);
 	}
 	
 	@Test
 	void testLessThan100000() {
-		Payment payment=new Payment("+78997776666",20000.0,LocalDateTime.now(),"Spending money is good");
-		assertEquals(600, PaymentOperations.getCommission(payment).getCommission(), "Error in commission calculations for a amount less than 5000");
+		assertEquals( "Error in commission calculations for a amount greater than 100000",600, PaymentOperations.calculateCommission(20000),1e-10);
 	}
 	@Test
-	void testLessThanOther() {
-		Payment payment=new Payment("+78997776666",500000.0,LocalDateTime.now(),"Spending money is good");
-		assertEquals(25000, PaymentOperations.getCommission(payment).getCommission(), "Error in commission calculations for a amount less than 5000");
+	void testGreaterThan100000() {
+		assertEquals("Error in commission calculations for a amount greater than 100000",25000, PaymentOperations.calculateCommission(500000.0),1e-10);
 	}
+	
 }
